@@ -21,7 +21,7 @@ function convert_iptc_keywords($image_infos) {
   // paths
   $filepath = $image_infos['path'];
   $perl = '/usr/bin/perl';
-  $exif_path = PHPWG_PLUGINS_PATH.'tmp/exiftool.pl';
+  $exif_path = PHPWG_PLUGINS_PATH.'exiftags/exiftool.pl';
 
   // get keywords through ExifTool commandline
   $output = shell_exec($perl.' '.$exif_path.' -json "'.$filepath.'"');
@@ -30,8 +30,12 @@ function convert_iptc_keywords($image_infos) {
   // add Piwigo tags
   $tag_id_arr = array();
   if (isset($metadata[0]['Keywords'])) {
-    foreach ($metadata[0]['Keywords'] as $tag) {
-      array_push($tag_id_arr,$tag);
+    if (is_array($metadata[0]['Keywords'])) {
+        foreach ($metadata[0]['Keywords'] as $tag) {
+          array_push($tag_id_arr,$tag);
+        }
+    } else {
+      array_push($tag_id_arr,$metadata[0]['Keywords']);
     }
     $tag_ids = get_tag_ids($tag_id_arr);
     add_tags($tag_ids, array($image_infos['id']));
