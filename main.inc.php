@@ -3,7 +3,7 @@
 /*
 Plugin Name: EXIF Tags
 Version: 1.0
-Description: Use ExifTool to convert IPTC keywords to Piwigo tags
+Description: Use ExifTool to convert IPTC keywords to Piwigo tags on upload
 Plugin URI: https://github.com/rachung2510/Piwigo-exiftags
 Author: rachung
 Author URI: https://github.com/rachung2510
